@@ -6,5 +6,5 @@ import { nodePolyfills } from "vite-plugin-node-polyfills";
 export default defineConfig({
   plugins: [react(), nodePolyfills()],
   build: { outDir: "dist" },
-  base: "/telegram-tmo/",
+  base: "/",
 });
