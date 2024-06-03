@@ -1,37 +1,25 @@
 import "./App.css";
-import { TonConnectButton } from "@tonconnect/ui-react";
-import { useTonConnect } from "./hooks/useTonConnect";
-import { useCounterContract } from "./hooks/useCounterContract";
 import "@twa-dev/sdk";
+import { useNavigate } from "react-router-dom";
+import Router from "./Router";
 
 function App() {
-  const { connected } = useTonConnect();
-  const { value, address, sendIncrement } = useCounterContract();
+  const navigate = useNavigate();
 
   return (
     <div className="App">
-      <div className="Container">
-        <TonConnectButton />
-
-        <div className="Card">
-          <b>Counter Address</b>
-          <div className="Hint">{address?.slice(0, 30) + "..."}</div>
-        </div>
-
-        <div className="Card">
-          <b>Counter Value</b>
-          <div>{value ?? "Loading..."}</div>
-        </div>
-
-        <a
-          className={`Button ${connected ? "Active" : "Disabled"}`}
-          onClick={() => {
-            sendIncrement();
-          }}
-        >
-          Increment
-        </a>
+      <div
+        style={{
+          display: "flex",
+          gap: "30px",
+          justifyContent: "center",
+          border: "2px solid white",
+        }}
+      >
+        <div onClick={() => navigate("/")}>튜터리얼</div>
+        <div onClick={() => navigate("/game")}>게임</div>
       </div>
+      <Router />
     </div>
   );
 }
