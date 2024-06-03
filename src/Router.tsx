@@ -1,4 +1,4 @@
-import { Route, Routes as ReactRoutes, useLocation } from "react-router-dom";
+import { Route, Routes as ReactRoutes } from "react-router-dom";
 import Game from "./Game";
 import DashBoard from "./DashBoard";
 
