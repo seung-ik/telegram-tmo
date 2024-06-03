@@ -9,7 +9,7 @@ const manifestUrl =
   "https://seung-ik.github.io/telegram-tmo/tonconnect-manifest.json'";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/telegram-tmo/">
     <TonConnectUIProvider manifestUrl={manifestUrl}>
       <App />
     </TonConnectUIProvider>
