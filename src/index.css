@@ -1,7 +1,7 @@
 :root {
   --tg-theme-bg-color: #efeff3;
   --tg-theme-button-color: #63d0f9;
-  --tg-theme-button-text-color: black;
+  --tg-theme-button-text-color: gray;
 }
 
 .App {
@@ -54,7 +54,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --tg-theme-bg-color: #131415;
+    --tg-theme-bg-color: gray;
     --tg-theme-text-color: #fff;
     --tg-theme-button-color: #32a6fb;
     --tg-theme-button-text-color: #fff;
