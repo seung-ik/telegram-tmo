@@ -15,6 +15,7 @@ const Header = ({ score, bestScore, nextItem }: HeaderProps) => {
   const getBestScore = () => {
     return score > bestScore ? score : bestScore;
   };
+  console.log(nextItem);
 
   return (
     <div
