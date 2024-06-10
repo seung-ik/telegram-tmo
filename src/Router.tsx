@@ -1,5 +1,5 @@
 import { Route, Routes as ReactRoutes } from "react-router-dom";
-import Game from "./Game";
+import Game from "./game";
 import DashBoard from "./DashBoard";
 
 export enum Paths {

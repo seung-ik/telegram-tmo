@@ -1,6 +1,10 @@
 import { TonConnectButton } from "@tonconnect/ui-react";
 import { useTonConnect } from "./hooks/useTonConnect";
 import { useCounterContract } from "./hooks/useCounterContract";
+import styles from "./dashboard.module.scss";
+import classNames from "classnames";
+
+const cx = classNames.bind(styles);
 
 const DashBoard = () => {
   const { connected } = useTonConnect();
@@ -8,7 +12,7 @@ const DashBoard = () => {
 
   return (
     <div>
-      <div className="Container">
+      <div className={cx("Container")}>
         <TonConnectButton />
 
         <div className="Card">

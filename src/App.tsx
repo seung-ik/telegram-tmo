@@ -1,5 +1,3 @@
-import "./App.css";
-import "@twa-dev/sdk";
 import Telegram from "@twa-dev/sdk";
 
 import { useNavigate } from "react-router-dom";
@@ -9,13 +7,13 @@ function App() {
   const navigate = useNavigate();
 
   return (
+    // <Router />
     <div className="App">
       <div
         style={{
           display: "flex",
           gap: "30px",
           justifyContent: "center",
-          border: "2px solid white",
         }}
       >
         <div>{Telegram?.initDataUnsafe?.user?.id || "id"}</div>
