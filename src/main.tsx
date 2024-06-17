@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 
 // this manifest is used temporarily for development purposes
 const manifestUrl =
-  "https://seung-ik.github.io/telegram-tmo/tonconnect-manifest.json'";
+  "https://seung-ik.github.io/telegram-tmo/tonconnect-manifest.json";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <BrowserRouter basename="/telegram-tmo/">
