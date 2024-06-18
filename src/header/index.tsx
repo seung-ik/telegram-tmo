@@ -1,3 +1,4 @@
+import { FruitImg } from "../assets";
 import { Fruit } from "../object/Fruit";
 import { getRenderWidth } from "../object/Size";
 import styles from "./index.module.scss";
@@ -32,7 +33,12 @@ const Header = ({ score, bestScore, nextItem }: HeaderProps) => {
       <div className={cx("nextArea")}>
         <span className={cx("text")}>NEXT</span>
         <div className={cx("next")}>
-          {/* <span className={cx('img')} style={{ backgroundImage: `url(${require('../../../resource/' + nextItem + '.png')})` }} /> */}
+          <span
+            className={cx("img")}
+            style={{
+              backgroundImage: `url(${FruitImg[nextItem as Fruit]})`,
+            }}
+          />
           <span className={cx("img")} />
         </div>
       </div>

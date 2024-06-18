@@ -15,6 +15,10 @@ let timeout: NodeJS.Timeout | null = null;
 const GameOverModal = ({ isVisible, onClick, score }: GameOverModalProps) => {
   const [toastVisible, setToastVisible] = useState(false);
 
+  const onClickEnroll = () => {
+    alert("comming soon");
+  };
+
   if (!isVisible) return null;
 
   const share = () => {
@@ -23,7 +27,7 @@ const GameOverModal = ({ isVisible, onClick, score }: GameOverModalProps) => {
         .share({
           title: "수박 만들기 게임",
           text: "과일들을 모아 수박을 만들어보세요.",
-          url: "https://koreacat.github.io/suika-game/",
+          url: "https://seung-ik.github.io/telegram-tmo",
         })
         .then(() => console.log("done"))
         .catch((error) => console.log(error));
@@ -50,23 +54,25 @@ const GameOverModal = ({ isVisible, onClick, score }: GameOverModalProps) => {
       }, 2800);
     }
   };
-  console.log(isVisible, score);
 
   return (
-    <div className={cx("gameOverArea")} style={{ border: "2px solid green" }}>
+    <div className={cx("gameOverArea")}>
       <span className={cx("text")}>GAME OVER</span>
       <span className={cx("score")}>SCORE: {score}</span>
       <button className={cx("btn")} onClick={onClick}>
         ↻ TRY AGAIN?
       </button>
+      <button className={cx("btn")} onClick={onClickEnroll}>
+        {"> ENROLL"}
+      </button>
       <div className={cx("linkArea")}>
-        <a
+        {/* <a
           href={"https://forms.gle/QbPDG6rzT4spywyf6"}
           target="_blank"
           className={cx("formsLink")}
         >
           의견 남기기
-        </a>
+        </a> */}
         <button className={cx("shareaBtn")} onClick={share}>
           공유하기
         </button>

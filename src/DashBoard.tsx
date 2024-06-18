@@ -1,4 +1,4 @@
-import { TonConnectButton } from "@tonconnect/ui-react";
+import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
 import { useTonConnect } from "./hooks/useTonConnect";
 import { useCounterContract } from "./hooks/useCounterContract";
 import styles from "./dashboard.module.scss";
@@ -9,6 +9,9 @@ const cx = classNames.bind(styles);
 const DashBoard = () => {
   const { connected } = useTonConnect();
   const { value, address, sendIncrement } = useCounterContract();
+  const wallet = useTonWallet();
+
+  console.log(wallet, "연결된집갑");
 
   return (
     <div>

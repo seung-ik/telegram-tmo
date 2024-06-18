@@ -67,7 +67,8 @@ const Game: React.FC = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "#a0633b",
+            // backgroundColor: "#a0633b",
+            background: "linear-gradient(0deg, #f5f1c4, #cfa76f, #a0633b)",
           }}
         >
           <Header bestScore={bestScore} score={score} nextItem={nextItem} />
