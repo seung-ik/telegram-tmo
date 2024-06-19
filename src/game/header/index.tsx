@@ -1,6 +1,6 @@
-import { FruitImg } from "../assets";
-import { Fruit } from "../object/Fruit";
-import { getRenderWidth } from "../object/Size";
+import { FruitImg } from "../../assets";
+import { Fruit } from "../../object/Fruit";
+import { getRenderWidth } from "../../object/Size";
 import styles from "./index.module.scss";
 import classNames from "classnames/bind";
 
@@ -16,7 +16,6 @@ const Header = ({ score, bestScore, nextItem }: HeaderProps) => {
   const getBestScore = () => {
     return score > bestScore ? score : bestScore;
   };
-  console.log(nextItem);
 
   return (
     <div

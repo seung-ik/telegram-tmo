@@ -22,6 +22,7 @@ function App() {
         <div>{Telegram?.initDataUnsafe?.user?.first_name || "firstname"}</div>
         <div onClick={() => navigate("/")}>튜터리얼</div>
         <div onClick={() => navigate("/game")}>게임</div>
+        <div onClick={() => navigate("/hexgl")}>비행기</div>
       </div>
       <Router />
     </div>

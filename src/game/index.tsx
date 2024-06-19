@@ -4,8 +4,8 @@ import styles from "./index.module.scss";
 import Intro from "../intro";
 import useMatterJS from "../hooks/useMatterJS";
 import classNames from "classnames";
-import Header from "../header";
-import GameOverModal from "../gameOverModal";
+import Header from "./header";
+import GameOverModal from "./gameOverModal";
 
 const cx = classNames.bind(styles);
 
