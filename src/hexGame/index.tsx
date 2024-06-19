@@ -1,8 +1,8 @@
-import classNames from "classnames";
-import styles from "./index.module.scss";
+// import classNames from "classnames";
+// import styles from "./index.module.scss";
 import { useEffect, useState } from "react";
 
-const cx = classNames.bind(styles);
+// const cx = classNames.bind(styles);
 
 const HexGame: React.FC = () => {
   const [gameResult, setGameResult] = useState(null);
