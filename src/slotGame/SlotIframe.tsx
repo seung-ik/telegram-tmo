@@ -1,31 +1,49 @@
 // import classNames from "classnames";
 // import styles from "./index.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 // const cx = classNames.bind(styles);
-
+export const getSlotGameScore = () => {
+  if (!localStorage.getItem("slotGame")) {
+    return [];
+  } else {
+    return JSON.parse(localStorage.getItem("slotGame") as string);
+  }
+};
 const SlotIframe: React.FC = () => {
-  const [gameResult, setGameResult] = useState(null);
+  const saveSlotGameScore = (_score: number) => {
+    const result = getSlotGameScore();
+    result.push(_score);
 
-  console.log(gameResult, "inreact");
+    localStorage.setItem("slotGame", JSON.stringify(result));
+  };
 
   useEffect(() => {
-    const handleMessage = (event: { origin: string; data: any }) => {
-      if (event.origin !== window.location.origin) return;
-      console.log("Message received from game:", event.data);
-      const result = event.data;
-      if (result.type === "gameOver") {
-        console.log("Game over result:", result);
-        setGameResult(result);
-        alert(result.score + " in react ");
-        return window.location.reload();
-      }
+    // 부모 창에서 사용할 함수들을 window 객체에 추가
+    window.__ctlArcadeStartSession = () => {
+      console.log("Game session started!");
+      // 여기에 게임 세션을 시작하는 로직을 추가하세요
     };
 
-    window.addEventListener("message", handleMessage);
+    window.__ctlArcadeEndSession = () => {
+      console.log("Game session ended!");
+      // 여기에 게임 세션을 종료하는 로직을 추가하세요
+    };
 
-    return () => {
-      window.removeEventListener("message", handleMessage);
+    window.__ctlArcadeSaveScore = (data) => {
+      console.log("Score saved:", data.score);
+      saveSlotGameScore(data.score);
+      // 여기에 점수를 저장하는 로직을 추가하세요
+    };
+
+    window.__ctlArcadeShowInterlevelAD = () => {
+      console.log("Showing interlevel ad...");
+      // 여기에 광고를 표시하는 로직을 추가하세요
+    };
+
+    window.__ctlArcadeShareEvent = (data) => {
+      console.log("Sharing event:", data);
+      // 여기에 공유 이벤트를 처리하는 로직을 추가하세요
     };
   }, []);
 
