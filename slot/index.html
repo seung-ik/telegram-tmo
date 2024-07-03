@@ -15,14 +15,23 @@
     <meta name="msapplication-tap-highlight" content="no" />
 
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    // jquery 라이브러리
     <script type="text/javascript" src="js/easeljs-NEXT.min.js"></script>
+    // easeljs 라이브러리
     <script type="text/javascript" src="js/tweenjs.js"></script>
+    // tweenjs 라이브러리
     <script type="text/javascript" src="js/screenfull.js"></script>
+    // 전체화면 모드 라이브러리
     <script type="text/javascript" src="js/platform.js"></script>
+    // 플랫폼정보 감지 라이브러리
     <script type="text/javascript" src="js/howler.min.js"></script>
+    // 오디오 관련 라이브러리
     <script type="text/javascript" src="js/ctl_utils.js"></script>
+    // 사이즈 및 화면방향 관련 함수
     <script type="text/javascript" src="js/sprite_lib.js"></script>
+    // 스프라이트 관련 라이브러리
     <script type="text/javascript" src="js/settings.js"></script>
+    // 환경변수 파일
     <script type="text/javascript" src="js/CCTLText.js"></script>
     <script type="text/javascript" src="js/CLang.min.js"></script>
     <script type="text/javascript" src="js/CPreloader.js"></script>
@@ -100,9 +109,9 @@
               redeem_link: "http://www.codethislab.com/",
             },
             {
-              background: "image_4",
+              background: "image_2",
               win_occurrence: 7,
-              prizewinning: true,
+              prizewinning: false,
               label: "",
               redeem_link: "http://www.codethislab.com/",
             },
@@ -114,17 +123,10 @@
               redeem_link: "http://www.codethislab.com/",
             },
             {
-              background: "image_5",
-              win_occurrence: 7,
-              prizewinning: true,
-              label: "trip to bahamas",
-              redeem_link: "http://www.codethislab.com/",
-            },
-            {
               background: "image_6",
               win_occurrence: 7,
               prizewinning: true,
-              label: "",
+              label: "trip to bahamas",
               redeem_link: "http://www.codethislab.com/",
             },
             {
@@ -136,6 +138,13 @@
             },
             {
               background: "image_8",
+              win_occurrence: 7,
+              prizewinning: true,
+              label: "",
+              redeem_link: "http://www.codethislab.com/",
+            },
+            {
+              background: "image_2",
               win_occurrence: 7,
               prizewinning: false,
               label: "",
@@ -160,42 +169,45 @@
         });
 
         $(oMain).on("start_session", function (evt) {
-          if (getParamValue("ctl-arcade") === "true") {
-            parent.__ctlArcadeStartSession();
-          }
+          console.log("123123123123 ?????? ", getParamValue("ctl-arcade"));
+          parent.__ctlArcadeStartSession();
+          // if (getParamValue("ctl-arcade") === "true") {
+          // console.log("123123123123");
+          // parent.__ctlArcadeStartSession();
+          // }
           //...ADD YOUR CODE HERE EVENTUALLY
         });
 
         $(oMain).on("end_session", function (evt) {
-          if (getParamValue("ctl-arcade") === "true") {
-            parent.__ctlArcadeEndSession();
-          }
+          // if (getParamValue("ctl-arcade") === "true") {
+          parent.__ctlArcadeEndSession();
+          // }
           //...ADD YOUR CODE HERE EVENTUALLY
         });
 
         $(oMain).on("save_score", function (evt, iPrizeIndex) {
-          if (getParamValue("ctl-arcade") === "true") {
-            parent.__ctlArcadeSaveScore({ score: iPrizeIndex });
-          }
+          // if (getParamValue("ctl-arcade") === "true") {
+          parent.__ctlArcadeSaveScore({ score: iPrizeIndex });
+          // }
           //...ADD YOUR CODE HERE EVENTUALLY
         });
 
         $(oMain).on("show_interlevel_ad", function (evt) {
-          if (getParamValue("ctl-arcade") === "true") {
-            parent.__ctlArcadeShowInterlevelAD();
-          }
+          // if (getParamValue("ctl-arcade") === "true") {
+          parent.__ctlArcadeShowInterlevelAD();
+          // }
           //...ADD YOUR CODE HERE EVENTUALLY
         });
 
         $(oMain).on("share_event", function (evt, iPrizeIndex) {
-          if (getParamValue("ctl-arcade") === "true") {
-            parent.__ctlArcadeShareEvent({
-              img: TEXT_SHARE_IMAGE,
-              title: TEXT_SHARE_TITLE,
-              msg: TEXT_SHARE_MSG1 + iPrizeIndex + TEXT_SHARE_MSG2,
-              msg_share: TEXT_SHARE_SHARE1 + iPrizeIndex + TEXT_SHARE_SHARE1,
-            });
-          }
+          // if (getParamValue("ctl-arcade") === "true") {
+          parent.__ctlArcadeShareEvent({
+            img: TEXT_SHARE_IMAGE,
+            title: TEXT_SHARE_TITLE,
+            msg: TEXT_SHARE_MSG1 + iPrizeIndex + TEXT_SHARE_MSG2,
+            msg_share: TEXT_SHARE_SHARE1 + iPrizeIndex + TEXT_SHARE_SHARE1,
+          });
+          // }
         });
 
         if (isIphone()) {
