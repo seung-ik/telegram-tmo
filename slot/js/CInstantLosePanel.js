@@ -60,7 +60,7 @@ function CInstantLosePanel(iCurWin) {
   this.show = function (oSprite) {
     $(s_oMain).trigger("show_interlevel_ad");
 
-    _oMsgText.refreshText();
+    _oMsgText.refreshText(TEXT_INSTANT_LOSE);
 
     _oGroup.visible = true;
 
