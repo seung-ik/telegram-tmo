@@ -5,7 +5,7 @@ import Router from "./Router";
 
 function App() {
   const navigate = useNavigate();
-  console.log(Telegram?.initDataUnsafe?.user, "user");
+  // console.log(Telegram?.initDataUnsafe?.user, "user");
 
   return (
     // <Router />

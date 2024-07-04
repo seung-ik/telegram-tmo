@@ -20,8 +20,6 @@ const SlotGame: React.FC = () => {
     return acc;
   }, {});
 
-  console.log(myCards, cardCounts);
-
   return (
     <div>
       <button

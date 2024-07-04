@@ -1,6 +1,6 @@
 // import classNames from "classnames";
 // import styles from "./index.module.scss";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 // const cx = classNames.bind(styles);
 export const getSlotGameScore = () => {
@@ -11,6 +11,9 @@ export const getSlotGameScore = () => {
   }
 };
 const SlotIframe: React.FC = () => {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const myValue = { type: "SLOT_GAME", data: { tickets: 4 } };
+
   const saveSlotGameScore = (_score: number) => {
     const result = getSlotGameScore();
     result.push(_score);
@@ -47,9 +50,20 @@ const SlotIframe: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const iframe = iframeRef.current;
+
+    if (iframe && iframe.contentWindow) {
+      iframe.onload = () => {
+        iframe.contentWindow!.postMessage(myValue, "*");
+      };
+    }
+  }, []);
+
   return (
     <div style={{ width: "100%", height: "calc(100% - 20px)" }}>
       <iframe
+        ref={iframeRef}
         src="/telegram-tmo/slot/index.html"
         title="HTML5 Game"
         style={{ border: "none", width: "100%", height: "100%" }}
