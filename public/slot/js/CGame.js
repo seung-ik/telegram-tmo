@@ -107,6 +107,7 @@ function CGame(oData) {
 
   this.releaseWheel = function () {
     this.tryShowAd();
+    $(s_oMain).trigger("use_ticket", _iCurWin); // CHECK : 티켓사용 트리거 추가
     _oInterface.disableSpin(false);
 
     stopSound("reel");
@@ -158,6 +159,7 @@ function CGame(oData) {
   };
 
   this.onExit = function () {
+    parent.location.replace("/telegram-tmo/slot"); // CHECK: 나가는 동작이 끄는거하고 당첨됬을때? 이렇게 두개인듯 남은 카드가 반영이안되서 추가함
     $(s_oMain).trigger("end_session");
     $(s_oMain).trigger("share_event", _iCurWin);
 

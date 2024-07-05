@@ -81,6 +81,10 @@
             console.log("Received data:", event.data.data);
             myTicketNum = data.tickets;
             isTicketNumSet = true;
+            if (!myTicketNum) {
+              alert("티켓없으면");
+              parent.location.replace("/telegram-tmo/slot");
+            }
             initializeGame(myTicketNum);
           }
           console.log(myTicketNum, "??");
@@ -109,14 +113,14 @@
                 background: "image_0",
                 win_occurrence: 7,
                 prizewinning: true,
-                label: "",
+                label: "tmotoken",
                 redeem_link: "http://www.codethislab.com/",
               },
               {
                 background: "image_1",
                 win_occurrence: 7,
                 prizewinning: true,
-                label: "",
+                label: "sunglass",
                 redeem_link: "http://www.codethislab.com/",
               },
               {
@@ -158,14 +162,14 @@
                 background: "image_7",
                 win_occurrence: 7,
                 prizewinning: true,
-                label: "",
+                label: "car",
                 redeem_link: "http://www.codethislab.com/",
               },
               {
                 background: "image_8",
                 win_occurrence: 7,
                 prizewinning: true,
-                label: "",
+                label: "token",
                 redeem_link: "http://www.codethislab.com/",
               },
               {
@@ -180,10 +184,10 @@
             total_images_backgrounds_in_folder: 9, ////SET HERE THE EXACT NUMBER OF BACKGROUND IMAGES IN GAME FOLDER IF YOU WANT TO ADD MORE DIFFERENT IMAGES
             num_instant_spin: ticketNum, ///NUMBER OF MAX SPINS
 
-            show_credits: true, //SET THIS VALUE TO FALSE IF YOU DON'T WANT TO SHOW CREDITS BUTTON
+            show_credits: false, //SET THIS VALUE TO FALSE IF YOU DON'T WANT TO SHOW CREDITS BUTTON
             fullscreen: true, //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
             check_orientation: false, //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
-            audio_enable_on_startup: false, //ENABLE/DISABLE AUDIO WHEN GAME STARTS
+            audio_enable_on_startup: true, //ENABLE/DISABLE AUDIO WHEN GAME STARTS
 
             //////////////////////////////////////////////////////////////////////////////////////////
             ad_show_counter: 5, //NUMBER OF SPIN BEFORE AD SHOWN
@@ -213,6 +217,13 @@
           $(oMain).on("save_score", function (evt, iPrizeIndex) {
             // if (getParamValue("ctl-arcade") === "true") {
             parent.__ctlArcadeSaveScore({ score: iPrizeIndex });
+            // }
+            //...ADD YOUR CODE HERE EVENTUALLY
+          });
+
+          $(oMain).on("use_ticket", function (evt, iPrizeIndex) {
+            // if (getParamValue("ctl-arcade") === "true") {
+            parent.__ctlArcadeUseTicket();
             // }
             //...ADD YOUR CODE HERE EVENTUALLY
           });
