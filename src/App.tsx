@@ -6,13 +6,14 @@ import { useEffect } from "react";
 
 function App() {
   const navigate = useNavigate();
+
   // console.log(Telegram?.initDataUnsafe?.user, "user");
 
   useEffect(() => {
     // 부모 창에서 사용할 함수들을 window 객체에 추가
     window.addEventListener("message", (event) => {
       if (event.data.type === "REDIRECT") {
-        window.location.replace(event.data.url);
+        navigate(event.data.url);
       }
     });
   }, []);
