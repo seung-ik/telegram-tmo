@@ -9,15 +9,6 @@ function App() {
 
   // console.log(Telegram?.initDataUnsafe?.user, "user");
 
-  useEffect(() => {
-    // 부모 창에서 사용할 함수들을 window 객체에 추가
-    window.addEventListener("message", (event) => {
-      if (event.data.type === "REDIRECT") {
-        navigate(event.data.url);
-      }
-    });
-  }, []);
-
   return (
     // <Router />
     <div className="App">
@@ -39,7 +30,7 @@ function App() {
           justifyContent: "center",
         }}
       >
-        <div onClick={() => navigate("/")}>튜터리얼</div>
+        <div onClick={() => navigate("/")}>튜터리얼 배포 확인용</div>
         <div onClick={() => navigate("/game")}>게임</div>
         <div onClick={() => navigate("/hexgl")}>비행기</div>
         <div onClick={() => navigate("/slot")}>슬롯머신</div>

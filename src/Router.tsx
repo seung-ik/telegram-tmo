@@ -1,9 +1,10 @@
-import { Route, Routes as ReactRoutes } from "react-router-dom";
+import { Route, Routes as ReactRoutes, useNavigate } from "react-router-dom";
 import Game from "./game";
 import DashBoard from "./DashBoard";
 import HexGame from "./hexGame";
 import SlotGame from "./slotGame";
 import SlotIframe from "./slotGame/SlotIframe";
+import { useEffect } from "react";
 
 export enum Paths {
   Dashboard = "/",
@@ -14,6 +15,17 @@ export enum Paths {
 }
 
 const Router = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // 부모 창에서 사용할 함수들을 window 객체에 추가
+    window.addEventListener("message", (event) => {
+      if (event.data.type === "REDIRECT") {
+        navigate(event.data.url);
+      }
+    });
+  }, []);
+
   return (
     <ReactRoutes>
       <Route>
