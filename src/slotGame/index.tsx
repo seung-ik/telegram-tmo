@@ -84,7 +84,7 @@ const SlotGame: React.FC = () => {
         style={{ border: "2px solid green", padding: "16px", fontSize: "20px" }}
         onClick={() => {
           alert("2000점을 넘으시오~");
-          window.location.reload();
+          // window.location.reload();
           navigate(Paths.Game);
         }}
       >
