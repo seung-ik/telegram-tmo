@@ -41,7 +41,14 @@ const SlotGame: React.FC = () => {
     <div>
       <button
         style={{ border: "2px solid green", padding: "16px", fontSize: "20px" }}
-        onClick={() => navigate(Paths.SlotIframe)}
+        onClick={() => {
+          if (getTickets() && getTickets() >= 1) {
+            navigate(Paths.SlotIframe);
+            return;
+          }
+          alert("티켓이 없는데요~");
+          return;
+        }}
       >
         룰렛돌려서 카드모으기~
       </button>
