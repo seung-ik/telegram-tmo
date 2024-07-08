@@ -64,6 +64,11 @@ const Game: React.FC = () => {
   };
 
   const handleGameStart = () => {
+    setScore(0);
+    setNextItem(getRandomFruitFeature()?.label as Fruit);
+    setIsGameOver(false);
+    clear();
+
     setIsStart(true);
   };
 
