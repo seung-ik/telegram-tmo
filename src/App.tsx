@@ -29,7 +29,7 @@ function App() {
           justifyContent: "center",
         }}
       >
-        <div onClick={() => navigate("/")}>튜터리얼 배포 확인용</div>
+        <div onClick={() => navigate("/")}>튜터리얼</div>
         <div onClick={() => navigate("/game")}>게임</div>
         <div onClick={() => navigate("/hexgl")}>비행기</div>
         <div onClick={() => navigate("/slot")}>슬롯머신</div>
