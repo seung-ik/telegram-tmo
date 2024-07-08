@@ -68,155 +68,194 @@
     ></div>
     <script>
       $(document).ready(function () {
-        var oMain = new CMain({
-          wheel_spin_time: 14, //TIME (in seconds) OF A SPIN
+        let myTicketNum = 0;
+        let isTicketNumSet = false;
 
-          //INSTANT_WIN_WHEEL_SETTINGS sets the win occurrence of each prize in the wheel.
-          //      -background: THE BACKGROUND IMAGE NAME IN sprites/item_prize_images FOLDER (the images name MUST ALWAYS BE image_#)
-          //      -win_occurrence: THE WIN OCCURRENCE OF THAT PRIZE. THE RATIO IS CALCULATED WITH THE FORMULA: (single win occurrence/sum of all occurrences). For instance, the prize associated to image_0, have occurrence 7/70 because the sum of all slices occurrences is 70.
-          //      -prizewinning: STATES WHETHER THE PRIZE IS WINNING OR NOT.
-          //              IF "false", THE PRIZE HAS NO VALUE AND WILL BE CONSIDERED AS A LOSE. THE GAME WILL CONTINUES UNTIL THE NUM. SPINS ENDS OR PLAYER WINS.
-          //              IF "true", THE PRIZE IS CONSIDERED AS A WIN, THE GAME ENDS AND THE PLAYER WILL BE REDIRECTED TO A REDEEM LINK
-          //      -label: INSERT A DESCRIPTION OF THE OBJECT. IF YOU DON'T WANT TO ADD ANY LABEL, LEAVE THE FIELD AS IT IS: (label: "") LABEL WON'T BE SHOWN, IS JUST A REMINDER.
-          //      -redeemlink: INSERT A REDEEM LINK FOR THE OBJECT. IF YOU DON'T WANT TO ADD ANY LINK, LEAVE THE FIELD AS IT IS: (redeemlink: "").
-          instant_win_wheel_settings: [
-            {
-              background: "image_0",
-              win_occurrence: 7,
-              prizewinning: true,
-              label: "",
-              redeem_link: "http://www.codethislab.com/",
-            },
-            {
-              background: "image_1",
-              win_occurrence: 7,
-              prizewinning: true,
-              label: "",
-              redeem_link: "http://www.codethislab.com/",
-            },
-            {
-              background: "image_2",
-              win_occurrence: 7,
-              prizewinning: false,
-              label: "",
-              redeem_link: "http://www.codethislab.com/",
-            },
-            {
-              background: "image_3",
-              win_occurrence: 7,
-              prizewinning: true,
-              label: "romantic dinner",
-              redeem_link: "http://www.codethislab.com/",
-            },
-            {
-              background: "image_2",
-              win_occurrence: 7,
-              prizewinning: false,
-              label: "",
-              redeem_link: "http://www.codethislab.com/",
-            },
-            {
-              background: "image_2",
-              win_occurrence: 7,
-              prizewinning: false,
-              label: "",
-              redeem_link: "http://www.codethislab.com/",
-            },
-            {
-              background: "image_6",
-              win_occurrence: 7,
-              prizewinning: true,
-              label: "trip to bahamas",
-              redeem_link: "http://www.codethislab.com/",
-            },
-            {
-              background: "image_7",
-              win_occurrence: 7,
-              prizewinning: true,
-              label: "",
-              redeem_link: "http://www.codethislab.com/",
-            },
-            {
-              background: "image_8",
-              win_occurrence: 7,
-              prizewinning: true,
-              label: "",
-              redeem_link: "http://www.codethislab.com/",
-            },
-            {
-              background: "image_2",
-              win_occurrence: 7,
-              prizewinning: false,
-              label: "",
-              redeem_link: "http://www.codethislab.com/",
-            },
-            /////////ADD HERE MORE SLOTS IF YOU WANT
-          ],
-          total_images_backgrounds_in_folder: 9, ////SET HERE THE EXACT NUMBER OF BACKGROUND IMAGES IN GAME FOLDER IF YOU WANT TO ADD MORE DIFFERENT IMAGES
-          num_instant_spin: 3, ///NUMBER OF MAX SPINS
+        window.addEventListener("message", (event) => {
+          // 보안 검사를 추가할 수 있습니다
+          // if (event.origin !== "https://your-origin.com") return;
 
-          show_credits: true, //SET THIS VALUE TO FALSE IF YOU DON'T WANT TO SHOW CREDITS BUTTON
-          fullscreen: true, //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
-          check_orientation: false, //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
-          audio_enable_on_startup: false, //ENABLE/DISABLE AUDIO WHEN GAME STARTS
-
-          //////////////////////////////////////////////////////////////////////////////////////////
-          ad_show_counter: 5, //NUMBER OF SPIN BEFORE AD SHOWN
-          //
-          //// THIS FUNCTIONALITY IS ACTIVATED ONLY WITH CTL ARCADE PLUGIN.///////////////////////////
-          /////////////////// YOU CAN GET IT AT: /////////////////////////////////////////////////////////
-          // http://codecanyon.net/item/ctl-arcade-wordpress-plugin/13856421?s_phrase=&s_rank=27 ///////////
+          const type = event.data.type;
+          if (type === "SLOT_GAME") {
+            const data = event.data.data;
+            console.log("Received data:", event.data.data);
+            myTicketNum = data.tickets;
+            isTicketNumSet = true;
+            if (!myTicketNum) {
+              alert("티켓없으면");
+              parent.location.replace("/telegram-tmo/slot");
+            }
+            initializeGame(myTicketNum);
+          }
+          console.log(myTicketNum, "??");
+          // 전달받은 데이터를 활용하는 로직을 추가합니다.
         });
 
-        $(oMain).on("start_session", function (evt) {
-          console.log("123123123123 ?????? ", getParamValue("ctl-arcade"));
-          parent.__ctlArcadeStartSession();
-          // if (getParamValue("ctl-arcade") === "true") {
-          // console.log("123123123123");
-          // parent.__ctlArcadeStartSession();
-          // }
-          //...ADD YOUR CODE HERE EVENTUALLY
-        });
+        function initializeGame(ticketNum) {
+          if (!isTicketNumSet) {
+            console.log("Ticket number is not set yet.");
+            return;
+          }
 
-        $(oMain).on("end_session", function (evt) {
-          // if (getParamValue("ctl-arcade") === "true") {
-          parent.__ctlArcadeEndSession();
-          // }
-          //...ADD YOUR CODE HERE EVENTUALLY
-        });
+          var oMain = new CMain({
+            wheel_spin_time: 4, //TIME (in seconds) OF A SPIN
 
-        $(oMain).on("save_score", function (evt, iPrizeIndex) {
-          // if (getParamValue("ctl-arcade") === "true") {
-          parent.__ctlArcadeSaveScore({ score: iPrizeIndex });
-          // }
-          //...ADD YOUR CODE HERE EVENTUALLY
-        });
+            //INSTANT_WIN_WHEEL_SETTINGS sets the win occurrence of each prize in the wheel.
+            //      -background: THE BACKGROUND IMAGE NAME IN sprites/item_prize_images FOLDER (the images name MUST ALWAYS BE image_#)
+            //      -win_occurrence: THE WIN OCCURRENCE OF THAT PRIZE. THE RATIO IS CALCULATED WITH THE FORMULA: (single win occurrence/sum of all occurrences). For instance, the prize associated to image_0, have occurrence 7/70 because the sum of all slices occurrences is 70.
+            //      -prizewinning: STATES WHETHER THE PRIZE IS WINNING OR NOT.
+            //              IF "false", THE PRIZE HAS NO VALUE AND WILL BE CONSIDERED AS A LOSE. THE GAME WILL CONTINUES UNTIL THE NUM. SPINS ENDS OR PLAYER WINS.
+            //              IF "true", THE PRIZE IS CONSIDERED AS A WIN, THE GAME ENDS AND THE PLAYER WILL BE REDIRECTED TO A REDEEM LINK
+            //      -label: INSERT A DESCRIPTION OF THE OBJECT. IF YOU DON'T WANT TO ADD ANY LABEL, LEAVE THE FIELD AS IT IS: (label: "") LABEL WON'T BE SHOWN, IS JUST A REMINDER.
+            //      -redeemlink: INSERT A REDEEM LINK FOR THE OBJECT. IF YOU DON'T WANT TO ADD ANY LINK, LEAVE THE FIELD AS IT IS: (redeemlink: "").
+            instant_win_wheel_settings: [
+              {
+                background: "image_0",
+                win_occurrence: 7,
+                prizewinning: true,
+                label: "tmotoken",
+                redeem_link: "http://www.codethislab.com/",
+              },
+              {
+                background: "image_1",
+                win_occurrence: 7,
+                prizewinning: true,
+                label: "sunglass",
+                redeem_link: "http://www.codethislab.com/",
+              },
+              {
+                background: "image_2",
+                win_occurrence: 7,
+                prizewinning: false,
+                label: "",
+                redeem_link: "http://www.codethislab.com/",
+              },
+              {
+                background: "image_3",
+                win_occurrence: 7,
+                prizewinning: true,
+                label: "romantic dinner",
+                redeem_link: "http://www.codethislab.com/",
+              },
+              {
+                background: "image_2",
+                win_occurrence: 7,
+                prizewinning: false,
+                label: "",
+                redeem_link: "http://www.codethislab.com/",
+              },
+              {
+                background: "image_2",
+                win_occurrence: 7,
+                prizewinning: false,
+                label: "",
+                redeem_link: "http://www.codethislab.com/",
+              },
+              {
+                background: "image_6",
+                win_occurrence: 7,
+                prizewinning: true,
+                label: "trip to bahamas",
+                redeem_link: "http://www.codethislab.com/",
+              },
+              {
+                background: "image_7",
+                win_occurrence: 7,
+                prizewinning: true,
+                label: "car",
+                redeem_link: "http://www.codethislab.com/",
+              },
+              {
+                background: "image_8",
+                win_occurrence: 7,
+                prizewinning: true,
+                label: "token",
+                redeem_link: "http://www.codethislab.com/",
+              },
+              {
+                background: "image_2",
+                win_occurrence: 7,
+                prizewinning: false,
+                label: "",
+                redeem_link: "http://www.codethislab.com/",
+              },
+              /////////ADD HERE MORE SLOTS IF YOU WANT
+            ],
+            total_images_backgrounds_in_folder: 9, ////SET HERE THE EXACT NUMBER OF BACKGROUND IMAGES IN GAME FOLDER IF YOU WANT TO ADD MORE DIFFERENT IMAGES
+            num_instant_spin: ticketNum, ///NUMBER OF MAX SPINS
 
-        $(oMain).on("show_interlevel_ad", function (evt) {
-          // if (getParamValue("ctl-arcade") === "true") {
-          parent.__ctlArcadeShowInterlevelAD();
-          // }
-          //...ADD YOUR CODE HERE EVENTUALLY
-        });
+            show_credits: false, //SET THIS VALUE TO FALSE IF YOU DON'T WANT TO SHOW CREDITS BUTTON
+            fullscreen: true, //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
+            check_orientation: false, //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
+            audio_enable_on_startup: true, //ENABLE/DISABLE AUDIO WHEN GAME STARTS
 
-        $(oMain).on("share_event", function (evt, iPrizeIndex) {
-          // if (getParamValue("ctl-arcade") === "true") {
-          parent.__ctlArcadeShareEvent({
-            img: TEXT_SHARE_IMAGE,
-            title: TEXT_SHARE_TITLE,
-            msg: TEXT_SHARE_MSG1 + iPrizeIndex + TEXT_SHARE_MSG2,
-            msg_share: TEXT_SHARE_SHARE1 + iPrizeIndex + TEXT_SHARE_SHARE1,
+            //////////////////////////////////////////////////////////////////////////////////////////
+            ad_show_counter: 5, //NUMBER OF SPIN BEFORE AD SHOWN
+            //
+            //// THIS FUNCTIONALITY IS ACTIVATED ONLY WITH CTL ARCADE PLUGIN.///////////////////////////
+            /////////////////// YOU CAN GET IT AT: /////////////////////////////////////////////////////////
+            // http://codecanyon.net/item/ctl-arcade-wordpress-plugin/13856421?s_phrase=&s_rank=27 ///////////
           });
-          // }
-        });
 
-        if (isIphone()) {
-          setTimeout(function () {
+          $(oMain).on("start_session", function (evt) {
+            console.log("123123123123 ?????? ", getParamValue("ctl-arcade"));
+            parent.__ctlArcadeStartSession();
+            // if (getParamValue("ctl-arcade") === "true") {
+            // console.log("123123123123");
+            // parent.__ctlArcadeStartSession();
+            // }
+            //...ADD YOUR CODE HERE EVENTUALLY
+          });
+
+          $(oMain).on("end_session", function (evt) {
+            // if (getParamValue("ctl-arcade") === "true") {
+            parent.__ctlArcadeEndSession();
+            // }
+            //...ADD YOUR CODE HERE EVENTUALLY
+          });
+
+          $(oMain).on("save_score", function (evt, iPrizeIndex) {
+            // if (getParamValue("ctl-arcade") === "true") {
+            parent.__ctlArcadeSaveScore({ score: iPrizeIndex });
+            // }
+            //...ADD YOUR CODE HERE EVENTUALLY
+          });
+
+          $(oMain).on("use_ticket", function (evt, iPrizeIndex) {
+            // if (getParamValue("ctl-arcade") === "true") {
+            parent.__ctlArcadeUseTicket();
+            // }
+            //...ADD YOUR CODE HERE EVENTUALLY
+          });
+
+          $(oMain).on("show_interlevel_ad", function (evt) {
+            // if (getParamValue("ctl-arcade") === "true") {
+            parent.__ctlArcadeShowInterlevelAD();
+            // }
+            //...ADD YOUR CODE HERE EVENTUALLY
+          });
+
+          $(oMain).on("share_event", function (evt, iPrizeIndex) {
+            // if (getParamValue("ctl-arcade") === "true") {
+            parent.__ctlArcadeShareEvent({
+              img: TEXT_SHARE_IMAGE,
+              title: TEXT_SHARE_TITLE,
+              msg: TEXT_SHARE_MSG1 + iPrizeIndex + TEXT_SHARE_MSG2,
+              msg_share: TEXT_SHARE_SHARE1 + iPrizeIndex + TEXT_SHARE_SHARE1,
+            });
+            // }
+          });
+
+          if (isIphone()) {
+            setTimeout(function () {
+              sizeHandler();
+            }, 200);
+          } else {
             sizeHandler();
-          }, 200);
-        } else {
-          sizeHandler();
+          }
         }
+
+        // 필요한 경우 초기 설정을 여기에 추가할 수 있습니다.
       });
     </script>
     <div class="check-fonts">
