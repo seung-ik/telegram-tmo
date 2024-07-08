@@ -83,7 +83,10 @@
             isTicketNumSet = true;
             if (!myTicketNum) {
               alert("티켓없으면");
-              parent.location.replace("/telegram-tmo/slot");
+              window.parent.postMessage(
+                { type: "REDIRECT", url: "/telegram-tmo/slot" },
+                "*"
+              );
             }
             initializeGame(myTicketNum);
           }
