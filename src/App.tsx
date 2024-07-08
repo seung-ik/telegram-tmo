@@ -2,7 +2,6 @@ import Telegram from "@twa-dev/sdk";
 
 import { useNavigate } from "react-router-dom";
 import Router from "./Router";
-import { useEffect } from "react";
 
 function App() {
   const navigate = useNavigate();
