@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Fruit, getRandomFruitFeature } from "../object/Fruit";
 import styles from "./index.module.scss";
 import Intro from "../intro";
