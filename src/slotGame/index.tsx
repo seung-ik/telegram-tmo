@@ -84,8 +84,8 @@ const SlotGame: React.FC = () => {
         style={{ border: "2px solid green", padding: "16px", fontSize: "20px" }}
         onClick={() => {
           alert("2000점을 넘으시오~");
-          navigate(Paths.Game);
           window.location.reload();
+          navigate(Paths.Game);
         }}
       >
         게임하고 티켓받기
