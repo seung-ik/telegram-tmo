@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Fruit, getRandomFruitFeature } from "../object/Fruit";
 import styles from "./index.module.scss";
 import Intro from "../intro";
@@ -6,10 +6,16 @@ import useMatterJS from "../hooks/useMatterJS";
 import classNames from "classnames";
 import Header from "./header";
 import GameOverModal from "./gameOverModal";
+import { addTickets } from "../slotGame/SlotIframe";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Paths } from "../Router";
 
 const cx = classNames.bind(styles);
 
 const Game: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [bestScore, setBestScore] = useState(0);
   const [score, setScore] = useState(0);
   const [nextItem, setNextItem] = useState<Fruit>(
@@ -48,9 +54,27 @@ const Game: React.FC = () => {
     clear();
   };
 
+  const handleGetTicket = () => {
+    setScore(0);
+    setNextItem(getRandomFruitFeature()?.label as Fruit);
+    setIsGameOver(false);
+    clear();
+    addTickets(1);
+    navigate(Paths.SlotGame);
+  };
+
   const handleGameStart = () => {
     setIsStart(true);
   };
+
+  useEffect(() => {
+    return () => {
+      setScore(0);
+      setNextItem(getRandomFruitFeature()?.label as Fruit);
+      setIsGameOver(false);
+      clear();
+    };
+  }, [location]);
 
   return (
     <div className={cx("gameArea")}>
@@ -80,6 +104,7 @@ const Game: React.FC = () => {
       <GameOverModal
         isVisible={isGameOver}
         onClick={handleTryAgain}
+        onClickGetTicket={handleGetTicket}
         score={score}
       />
     </div>

@@ -8,16 +8,18 @@ interface GameOverModalProps {
   isVisible: boolean;
   onClick: () => void;
   score: number;
+  onClickGetTicket: () => void;
 }
 
 let timeout: NodeJS.Timeout | null = null;
 
-const GameOverModal = ({ isVisible, onClick, score }: GameOverModalProps) => {
+const GameOverModal = ({
+  isVisible,
+  onClick,
+  score,
+  onClickGetTicket,
+}: GameOverModalProps) => {
   const [toastVisible, setToastVisible] = useState(false);
-
-  const onClickEnroll = () => {
-    alert("comming soon");
-  };
 
   if (!isVisible) return null;
 
@@ -59,12 +61,16 @@ const GameOverModal = ({ isVisible, onClick, score }: GameOverModalProps) => {
     <div className={cx("gameOverArea")}>
       <span className={cx("text")}>GAME OVER</span>
       <span className={cx("score")}>SCORE: {score}</span>
-      <button className={cx("btn")} onClick={onClick}>
-        ↻ TRY AGAIN?
-      </button>
-      <button className={cx("btn")} onClick={onClickEnroll}>
-        {"> ENROLL"}
-      </button>
+
+      {score > 2000 ? (
+        <button className={cx("btn")} onClick={onClickGetTicket}>
+          {"Get Ticket"}
+        </button>
+      ) : (
+        <button className={cx("btn")} onClick={onClick}>
+          ↻ TRY AGAIN?
+        </button>
+      )}
       <div className={cx("linkArea")}>
         {/* <a
           href={"https://forms.gle/QbPDG6rzT4spywyf6"}

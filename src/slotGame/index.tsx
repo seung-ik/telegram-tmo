@@ -66,6 +66,7 @@ const SlotGame: React.FC = () => {
 
             addTickets(1);
             setMyTickets((prev) => prev + 1);
+            alert("지급완료");
           } else {
             const nextClaimTime = format(
               addHours(new Date(latestFreeTicketTime), FREE_TICKET_GAP_TIME),
@@ -78,6 +79,16 @@ const SlotGame: React.FC = () => {
         }}
       >
         공짜티켓받기
+      </button>
+      <button
+        style={{ border: "2px solid green", padding: "16px", fontSize: "20px" }}
+        onClick={() => {
+          alert("2000점을 넘으시오~");
+          navigate(Paths.Game);
+          window.location.reload();
+        }}
+      >
+        게임하고 티켓받기
       </button>
       <div>
         <div>

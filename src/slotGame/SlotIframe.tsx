@@ -17,7 +17,12 @@ export const addTickets = (_num: number) => {
   if (prevTickets) {
     localStorage.setItem("ticket_num", String(prevTickets + _num));
   }
+
+  if (!prevTickets) {
+    localStorage.setItem("ticket_num", String(1));
+  }
 };
+
 export const getSlotGameScore = () => {
   if (!localStorage.getItem("slotGame")) {
     return [];
