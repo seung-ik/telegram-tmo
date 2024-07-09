@@ -1,7 +1,7 @@
 import Telegram from "@twa-dev/sdk";
 
 import { useNavigate } from "react-router-dom";
-import Router from "./Router";
+import Router, { Paths } from "./Router";
 
 function App() {
   const navigate = useNavigate();
@@ -33,6 +33,7 @@ function App() {
         <div onClick={() => navigate("/game")}>게임</div>
         <div onClick={() => navigate("/hexgl")}>비행기</div>
         <div onClick={() => navigate("/slot")}>슬롯머신</div>
+        <div onClick={() => navigate(Paths.TaptenIframe)}>탭텐</div>
       </div>
       <Router />
     </div>

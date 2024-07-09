@@ -5,6 +5,7 @@ import HexGame from "./hexGame";
 import SlotGame from "./slotGame";
 import SlotIframe from "./slotGame/SlotIframe";
 import { useEffect } from "react";
+import TaptenIframe from "./tapten";
 
 export enum Paths {
   Dashboard = "/",
@@ -12,6 +13,7 @@ export enum Paths {
   HexGame = "/hexgl",
   SlotGame = "/slot",
   SlotIframe = "/slot/start",
+  TaptenIframe = "/tapten",
 }
 
 const Router = () => {
@@ -34,6 +36,7 @@ const Router = () => {
         <Route path={Paths.HexGame} element={<HexGame />} />
         <Route path={Paths.SlotGame} element={<SlotGame />} />
         <Route path={Paths.SlotIframe} element={<SlotIframe />} />
+        <Route path={Paths.TaptenIframe} element={<TaptenIframe />} />
       </Route>
     </ReactRoutes>
   );
