@@ -33,7 +33,7 @@ function App() {
         <div onClick={() => navigate("/game")}>게임</div>
         <div onClick={() => navigate("/hexgl")}>비행기</div>
         <div onClick={() => navigate("/slot")}>슬롯머신</div>
-        <div onClick={() => navigate(Paths.TaptenIframe)}>탭텐</div>
+        <div onClick={() => navigate(Paths.TaptenIframe)}>점프투점프</div>
       </div>
       <Router />
     </div>
