@@ -68,20 +68,15 @@
     ></div>
     <script>
       $(document).ready(function () {
-        let myTicketNum = 0;
-        let isTicketNumSet = false;
         initializeGame(1);
 
         window.addEventListener("message", (event) => {
-          // 보안 검사를 추가할 수 있습니다
-          // if (event.origin !== "https://your-origin.com") return;
-
           const type = event.data.type;
           if (type === "SLOT_GAME") {
+            let myTicketNum = 0;
             const data = event.data.data;
             console.log("Received data:", event.data.data);
             myTicketNum = data.tickets;
-            isTicketNumSet = true;
             if (!myTicketNum) {
               alert("티켓없으면");
               window.parent.postMessage(
@@ -90,19 +85,12 @@
               );
               return;
             }
-            console.log("open");
-            console.log();
+            console.log(myTicketNum, "??");
             initializeGame(myTicketNum);
           }
-          console.log(myTicketNum, "??");
         });
 
         function initializeGame(ticketNum) {
-          // if (!isTicketNumSet) {
-          //   console.log("Ticket number is not set yet.");
-          //   return;
-          // }
-
           var oMain = new CMain({
             wheel_spin_time: 4, //TIME (in seconds) OF A SPIN
 
