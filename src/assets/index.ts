@@ -19,7 +19,6 @@ import CARD_4 from "./slotGame/image_4.png";
 import CARD_5 from "./slotGame/image_5.png";
 import CARD_6 from "./slotGame/image_6.png";
 import CARD_7 from "./slotGame/image_7.png";
-import CARD_8 from "./slotGame/image_8.png";
 
 export const FruitImg: { [key in Fruit]: string } = {
   APPLE,
@@ -60,7 +59,6 @@ export const CardImg = {
   CARD_5,
   CARD_6,
   CARD_7,
-  CARD_8,
 } as const;
 
 export type CardKey = keyof typeof CardImg;
