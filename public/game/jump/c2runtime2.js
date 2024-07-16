@@ -15117,6 +15117,16 @@ cr.plugins_.AJAX = function (runtime) {
         } catch (e) {}
         next_override_mime = "";
       }
+
+      // TODO : 게임종료시에 요청 안넣고 메시지로 iframe 외부로 전달
+      if (tag_ === "ajax_finish_game") {
+        window.parent.postMessage(
+          { type: "double_jump_score", data: data_ },
+          "*"
+        );
+        return;
+      }
+
       if (data_) request.send(data_);
       else request.send();
     } catch (e) {
@@ -15202,7 +15212,6 @@ cr.plugins_.AJAX = function (runtime) {
     }
   };
   Acts.prototype.Post = function (tag_, url_, data_, method_) {
-    console.log(tag_, url_, data_, method_);
     this.doRequest(tag_, url_, method_, data_);
   };
   Acts.prototype.SetTimeout = function (t) {
@@ -26557,8 +26566,6 @@ cr.behaviors.lunarray_Tween = function (runtime) {
     }
   };
   cnds.OnEnd = function (a, b, c) {
-    // TODO: 수정
-    console.log(a, b, c);
     if (this.onEndDone === false) {
       return this.onEnd;
     }
