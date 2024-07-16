@@ -30,10 +30,10 @@ function App() {
         }}
       >
         <div onClick={() => navigate("/")}>튜터리얼</div>
-        <div onClick={() => navigate("/game")}>게임</div>
-        <div onClick={() => navigate("/hexgl")}>비행기</div>
-        <div onClick={() => navigate("/slot")}>슬롯머신</div>
-        <div onClick={() => navigate(Paths.TaptenIframe)}>점프투점프</div>
+        <div onClick={() => navigate(Paths.Game)}>수박게임</div>
+        <div onClick={() => navigate(Paths.SlotGame)}>슬롯머신</div>
+        <div onClick={() => navigate(Paths.JumpIframe)}>점프투점프</div>
+        <div onClick={() => navigate(Paths.PlusIframe)}>더하기</div>
       </div>
       <Router />
     </div>

@@ -3,13 +3,17 @@
 
 import { useEffect } from "react";
 import Telegram from "@twa-dev/sdk";
+import { addTickets } from "../slotGame/SlotIframe";
+import { useNavigate } from "react-router-dom";
+import { Paths } from "../Router";
 
 // const cx = classNames.bind(styles);
 interface QueryParams {
   [key: string]: string;
 }
 
-const TaptenIframe: React.FC = () => {
+const JumpIframe: React.FC = () => {
+  const navigate = useNavigate();
   function stringToObject(str: string): QueryParams {
     // 먼저 문자열을 & 기준으로 분리합니다.
     const keyValuePairs = str.split("&");
@@ -47,6 +51,12 @@ const TaptenIframe: React.FC = () => {
           Telegram?.initDataUnsafe?.user?.id || "???텔레그램 미니앱 아닐때"
         }
         `);
+        console.log(gameInfo.score);
+        if (Number(gameInfo.score) >= 5) {
+          addTickets(1);
+          alert("티켓이 지급되었습니다");
+          navigate(Paths.SlotGame);
+        }
       }
     };
 
@@ -67,4 +77,4 @@ const TaptenIframe: React.FC = () => {
   );
 };
 
-export default TaptenIframe;
+export default JumpIframe;

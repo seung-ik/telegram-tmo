@@ -95,7 +95,27 @@ const SlotGame: React.FC = () => {
           navigate(Paths.Game);
         }}
       >
-        게임하고 티켓받기
+        수박게임하고 티켓받기
+      </button>
+      <button
+        style={{ border: "2px solid green", padding: "16px", fontSize: "20px" }}
+        onClick={() => {
+          alert("5점을 넘으시오~");
+          // window.location.reload();
+          navigate(Paths.JumpIframe);
+        }}
+      >
+        점프하고 티켓받기
+      </button>
+      <button
+        style={{ border: "2px solid green", padding: "16px", fontSize: "20px" }}
+        onClick={() => {
+          alert("5점을 넘으시오~");
+          // window.location.reload();
+          navigate(Paths.PlusIframe);
+        }}
+      >
+        암산하고 티켓받기
       </button>
       <div>
         <div>
