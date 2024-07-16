@@ -15126,6 +15126,7 @@ cr.plugins_.AJAX = function (runtime) {
         );
         return;
       }
+      alert("요청")
 
       if (data_) request.send(data_);
       else request.send();
