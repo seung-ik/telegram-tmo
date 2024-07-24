@@ -1,4 +1,5 @@
 import Telegram from "@twa-dev/sdk";
+import { initSwipeBehavior } from "@telegram-apps/sdk";
 
 import { useNavigate } from "react-router-dom";
 import Router, { Paths } from "./Router";
@@ -6,12 +7,14 @@ import { useEffect } from "react";
 
 function App() {
   const navigate = useNavigate();
+  const [swipeBehavior] = initSwipeBehavior();
 
   // console.log(Telegram?.initDataUnsafe?.user, "user");
 
   useEffect(() => {
     if (Telegram) {
       Telegram.expand();
+      swipeBehavior.disableVerticalSwipe();
     }
   }, [Telegram]);
 
