@@ -14,7 +14,7 @@
     "@ton/core": "^0.56.3",
     "@ton/crypto": "^3.2.0",
     "@ton/ton": "^13.11.1",
-    "@tonconnect/ui-react": "^2.0.3",
+    "@tonconnect/ui-react": "^2.0.6",
     "@twa-dev/sdk": "^7.0.0",
     "@twa-dev/types": "^7.0.0",
     "@types/canvas-confetti": "^1.6.2",

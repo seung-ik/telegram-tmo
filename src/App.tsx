@@ -2,11 +2,18 @@ import Telegram from "@twa-dev/sdk";
 
 import { useNavigate } from "react-router-dom";
 import Router, { Paths } from "./Router";
+import { useEffect } from "react";
 
 function App() {
   const navigate = useNavigate();
 
   // console.log(Telegram?.initDataUnsafe?.user, "user");
+
+  useEffect(() => {
+    if (Telegram) {
+      Telegram.expand();
+    }
+  }, [Telegram]);
 
   return (
     // <Router />

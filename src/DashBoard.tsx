@@ -1,5 +1,6 @@
 import {
   TonConnectButton,
+  useTonConnectModal,
   useTonConnectUI,
   useTonWallet,
 } from "@tonconnect/ui-react";
@@ -16,6 +17,8 @@ import TonWeb from "tonweb";
 const cx = classNames.bind(styles);
 
 const DashBoard = () => {
+  const { open, close } = useTonConnectModal();
+
   const { connected } = useTonConnect();
   const { jettonAddress } = useIkekContract();
   const { value, address, sendIncrement } = useCounterContract();
@@ -129,6 +132,9 @@ const DashBoard = () => {
         >
           <TonConnectButton />
         </div>
+
+        <button onClick={() => open()}>Open modal</button>
+        <button onClick={() => close()}>Close modal</button>
 
         <div className="Card">
           <b>Counter Address</b>
