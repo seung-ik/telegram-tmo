@@ -16,8 +16,8 @@ function App() {
     if (Telegram) {
       console.log(Telegram);
       alert("2");
-      Telegram.sendData(data);
-      Telegram.sendData(data2);
+      // Telegram.sendData(data);
+      // Telegram.sendData(data2);
       // Telegram.sendData({ is_visible: true });
       // Telegram.sendData({ allow_vertical_swipe: false });
       // Telegram.sendData();
