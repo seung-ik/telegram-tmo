@@ -1,5 +1,4 @@
 import Telegram from "@twa-dev/sdk";
-import { initSwipeBehavior } from "@telegram-apps/sdk";
 
 import { useNavigate } from "react-router-dom";
 import Router, { Paths } from "./Router";
@@ -7,14 +6,23 @@ import { useEffect } from "react";
 
 function App() {
   const navigate = useNavigate();
-  const [swipeBehavior] = initSwipeBehavior();
 
   // console.log(Telegram?.initDataUnsafe?.user, "user");
 
   useEffect(() => {
+    const data = JSON.stringify({ is_visible: true });
+    const data2 = JSON.stringify({ allow_vertical_swipe: false });
+
+    alert("1");
+    window.TelegramWebviewProxy?.postEvent("web_app_setup_back_button", data);
+    window.TelegramWebviewProxy?.postEvent(
+      "web_app_setup_swipe_behavior",
+      data2
+    );
+    alert("2");
+
     if (Telegram) {
       Telegram.expand();
-      swipeBehavior.disableVerticalSwipe();
     }
   }, [Telegram]);
 
