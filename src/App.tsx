@@ -7,25 +7,17 @@ import { useEffect } from "react";
 function App() {
   const navigate = useNavigate();
 
-  // console.log(Telegram?.initDataUnsafe?.user, "user");
-
   useEffect(() => {
     const data = JSON.stringify({ is_visible: true });
     const data2 = JSON.stringify({ allow_vertical_swipe: false });
 
     if (Telegram) {
-      console.log(Telegram);
-      alert("2");
-      // Telegram.sendData(data);
-      // Telegram.sendData(data2);
-      // Telegram.sendData({ is_visible: true });
-      // Telegram.sendData({ allow_vertical_swipe: false });
-      // Telegram.sendData();
-      // postEvent("web_app_setup_back_button", { is_visible: true });
-      // postEvent("web_app_setup_swipe_behavior", {
-      // allow_vertical_swipe: false,
-      // });
-      alert("3");
+      console.log(window.Telegram.WebView.postEvent);
+      window.Telegram.WebView?.postEvent(
+        "web_app_setup_swipe_behavior",
+        (data: any) => console.log(data),
+        data2
+      );
       Telegram.expand();
     }
   }, [Telegram]);

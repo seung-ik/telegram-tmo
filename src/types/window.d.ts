@@ -3,6 +3,7 @@ export {};
 declare global {
   interface Window {
     TelegramWebviewProxy?: any; // Adjust the type based on the actual type of TelegramWebviewProxy
+    Telegram?: any;
 
     __ctlArcadeStartSession: () => void;
     __ctlArcadeEndSession: () => void;
