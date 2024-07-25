@@ -8,7 +8,6 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const data = JSON.stringify({ is_visible: true });
     const data2 = JSON.stringify({ allow_vertical_swipe: false });
 
     if (Telegram) {
