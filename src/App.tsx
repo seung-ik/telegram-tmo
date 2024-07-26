@@ -11,39 +11,52 @@ function App() {
     // Telegram Web Apps SDK 로드 확인
     if (window.Telegram && window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
-      console.log(tg);
-      if (tg.disableVerticalSwipes) {
-        alert("disable vertical");
-        tg.disableVerticalSwipes();
-      }
-      // 뒤로 가기 버튼 활성화
-      tg.BackButton.show();
+      tg.expand();
+      console.log(location.pathname);
 
-      // 뒤로 가기 버튼 클릭 이벤트 처리
-      tg.BackButton.onClick(() => {
-        navigate(-1); // 뒤로 가기
-      });
+      // 뒤로 가기 버튼 또는 닫기 버튼 활성화
+      if (location.pathname === "/telegram-tmo/") {
+        alert("hide");
+        // 첫 페이지인 경우 닫기 버튼 활성화
+        tg.BackButton.hide();
+        tg.MainButton.show();
+
+        // 닫기 버튼 클릭 이벤트 처리
+        tg.MainButton.onClick(() => {
+          tg.close(); // Telegram Mini App 닫기
+        });
+      } else {
+        // 첫 페이지가 아닌 경우 뒤로 가기 버튼 활성화
+        tg.MainButton.hide();
+        tg.BackButton.show();
+
+        // 뒤로 가기 버튼 클릭 이벤트 처리
+        tg.BackButton.onClick(() => {
+          navigate(-1); // 뒤로 가기
+        });
+      }
 
       // 컴포넌트 언마운트 시 이벤트 핸들러 제거
       return () => {
         tg.BackButton.offClick();
+        tg.MainButton.offClick();
       };
     }
-  }, [navigate]);
+  }, [navigate, location.pathname]);
 
-  useEffect(() => {
-    const data2 = JSON.stringify({ allow_vertical_swipe: false });
+  // useEffect(() => {
+  //   const data2 = JSON.stringify({ allow_vertical_swipe: false });
 
-    if (Telegram) {
-      console.log(window.Telegram.WebView.postEvent);
-      window.Telegram.WebView?.postEvent(
-        "web_app_setup_swipe_behavior",
-        (data: any) => console.log(data),
-        data2
-      );
-      Telegram.expand();
-    }
-  }, [Telegram]);
+  //   if (Telegram) {
+  //     console.log(window.Telegram.WebView.postEvent);
+  //     window.Telegram.WebView?.postEvent(
+  //       "web_app_setup_swipe_behavior",
+  //       (data: any) => console.log(data),
+  //       data2
+  //     );
+  //     Telegram.expand();
+  //   }
+  // }, [Telegram]);
 
   return (
     // <Router />
