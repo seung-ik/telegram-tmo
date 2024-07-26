@@ -8,6 +8,30 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Telegram Web Apps SDK 로드 확인
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      console.log(tg);
+      if (tg.disableVerticalSwipes) {
+        alert("disable vertical");
+        tg.disableVerticalSwipes();
+      }
+      // 뒤로 가기 버튼 활성화
+      tg.BackButton.show();
+
+      // 뒤로 가기 버튼 클릭 이벤트 처리
+      tg.BackButton.onClick(() => {
+        navigate(-1); // 뒤로 가기
+      });
+
+      // 컴포넌트 언마운트 시 이벤트 핸들러 제거
+      return () => {
+        tg.BackButton.offClick();
+      };
+    }
+  }, [navigate]);
+
+  useEffect(() => {
     const data2 = JSON.stringify({ allow_vertical_swipe: false });
 
     if (Telegram) {
