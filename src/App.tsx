@@ -7,9 +7,8 @@ import { useEffect } from "react";
 function App() {
   const navigate = useNavigate();
 
-  // TODO: test 스와이프
   useEffect(() => {
-    alert("test!!");
+    alert("test!22222!");
     if (window.Telegram && window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
       console.log(tg.isVerticalSwipesEnabled, "information");
