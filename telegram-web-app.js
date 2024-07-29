@@ -304,7 +304,7 @@
     webAppInitDataUnsafe = {};
   var themeParams = {},
     colorScheme = "light";
-  var webAppVersion = "7.7";
+  var webAppVersion = "6.0";
   var webAppPlatform = "unknown";
 
   if (initParams.tgWebAppData && initParams.tgWebAppData.length) {
@@ -336,7 +336,7 @@
     setThemeParams(theme_params);
   }
   if (initParams.tgWebAppVersion) {
-    webAppVersion = "7.7";
+    webAppVersion = initParams.tgWebAppVersion;
   }
   if (initParams.tgWebAppPlatform) {
     webAppPlatform = initParams.tgWebAppPlatform;
@@ -504,13 +504,13 @@
 
   var isVerticalSwipesEnabled = true;
   function toggleVerticalSwipes(enable_swipes) {
-    if (!versionAtLeast("7.7")) {
-      console.warn(
-        "[Telegram.WebApp] Changing swipes behavior is not supported in version " +
-          webAppVersion
-      );
-      return;
-    }
+    // if (!versionAtLeast("7.7")) {
+    //   console.warn(
+    //     "[Telegram.WebApp] Changing swipes behavior is not supported in version " +
+    //       webAppVersion
+    //   );
+    //   return;
+    // }
     isVerticalSwipesEnabled = !!enable_swipes;
     WebView.postEvent("web_app_setup_swipe_behavior", false, {
       allow_vertical_swipe: isVerticalSwipesEnabled,
