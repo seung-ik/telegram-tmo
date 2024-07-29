@@ -162,6 +162,29 @@ function App() {
         <div onClick={() => navigate(Paths.SlotGame)}>슬롯머신</div>
         <div onClick={() => navigate(Paths.JumpIframe)}>점프투점프</div>
         <div onClick={() => navigate(Paths.PlusIframe)}>더하기</div>
+        <div
+          onClick={() => {
+            const tg = window.Telegram.WebApp;
+            // tg.openLink("https://t.me/ikek_bot?start=invite");
+            const url = "https://naver.com";
+            const text = "test123123123";
+            tg.openTelegramLink(
+              `https://t.me/share/url?url=${url}&text=${text}
+             `
+            );
+
+            // tg.showPopup({
+            //   title: "친구 초대",
+            //   message: "어떤 대화방에 초대 메시지를 보낼까요?",
+            //   buttons: [
+            //     { id: "cancel", type: "close", text: "취소" },
+            //     { id: "send", type: "default", text: "보내기" },
+            //   ],
+            // });
+          }}
+        >
+          친구초대해보기
+        </div>
       </div>
       <Router />
     </div>
