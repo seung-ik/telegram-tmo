@@ -9,7 +9,6 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    alert("test!22222!");
     if (window.Telegram && window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
       console.log(tg.isVerticalSwipesEnabled, "information");
@@ -44,7 +43,6 @@ function App() {
 
       // 뒤로 가기 버튼 또는 닫기 버튼 활성화
       if (location.pathname === "/telegram-tmo/") {
-        alert("hide");
         // 첫 페이지인 경우 닫기 버튼 활성화
         tg.BackButton.hide();
         tg.MainButton.show();
