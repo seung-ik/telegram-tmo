@@ -3,6 +3,7 @@ import Telegram from "@twa-dev/sdk";
 import { useNavigate } from "react-router-dom";
 import Router, { Paths } from "./Router";
 import { useEffect } from "react";
+import { request } from "@telegram-apps/sdk";
 
 function App() {
   const navigate = useNavigate();
@@ -22,6 +23,16 @@ function App() {
         alert(`isVerticalSwipesEnabled ${tg.isVerticalSwipesEnabled}`);
       }
     }
+
+    const test = async () => {
+      const value = await request({
+        method: "web_app_request_viewport",
+        event: "viewport_changed",
+      });
+
+      alert(JSON.stringify(value));
+    };
+    test();
   }, [window.Telegram]);
 
   useEffect(() => {
