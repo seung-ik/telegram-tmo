@@ -61,6 +61,8 @@ function App() {
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
+      tg.ready();
+      alert(tg.version);
       console.log(tg.isVerticalSwipesEnabled, "information");
       if (tg.enableVerticalSwipes) {
         alert(`enableVerticalSwipes ${tg.enableVerticalSwipes}`);
