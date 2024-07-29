@@ -166,8 +166,10 @@ function App() {
           onClick={() => {
             const tg = window.Telegram.WebApp;
             // tg.openLink("https://t.me/ikek_bot?start=invite");
-            const url = "https://naver.com";
-            const text = "test123123123";
+            const url = `https://t.me/dev_ik_game_bot/start?startapp=${Telegram?.initDataUnsafe?.user?.id}`;
+            const text = encodeURIComponent(
+              `초대하면 100원 줌! \n⭐️ 초대하고 게임 시작하면 500원 줌`
+            );
             tg.openTelegramLink(
               `https://t.me/share/url?url=${url}&text=${text}
              `
