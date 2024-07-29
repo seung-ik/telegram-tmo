@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Router, { Paths } from "./Router";
 import { useEffect } from "react";
 // import { request } from "@telegram-apps/sdk";
-import { initSwipeBehavior } from "@telegram-apps/sdk";
-import { request } from "@telegram-apps/sdk";
+// import { initSwipeBehavior } from "@telegram-apps/sdk";
+// import { request } from "@telegram-apps/sdk";
 // import { mockTelegramEnv, parseInitData } from "@telegram-apps/sdk";
 
 // const initDataRaw = new URLSearchParams([
@@ -51,12 +51,12 @@ import { request } from "@telegram-apps/sdk";
 
 function App() {
   const navigate = useNavigate();
-  const [swipeBehavior] = initSwipeBehavior();
+  // const [swipeBehavior] = initSwipeBehavior();
 
-  useEffect(() => {
-    swipeBehavior.disableVerticalSwipe();
-    console.log(swipeBehavior.isVerticalSwipeEnabled); // false
-  }, []);
+  // useEffect(() => {
+  //   swipeBehavior.disableVerticalSwipe();
+  //   console.log(swipeBehavior.isVerticalSwipeEnabled); // false
+  // }, []);
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -73,15 +73,15 @@ function App() {
       }
     }
 
-    const test = async () => {
-      const value = await request({
-        method: "web_app_request_viewport",
-        event: "viewport_changed",
-      });
+    // const test = async () => {
+    //   const value = await request({
+    //     method: "web_app_request_viewport",
+    //     event: "viewport_changed",
+    //   });
 
-      alert(JSON.stringify(value));
-    };
-    test();
+    //   alert(JSON.stringify(value));
+    // };
+    // test();
   }, [window.Telegram]);
 
   useEffect(() => {
