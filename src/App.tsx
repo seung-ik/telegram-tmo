@@ -62,7 +62,7 @@ function App() {
     if (window.Telegram && window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.ready();
-      alert(tg.version);
+      alert(tg.version + 123123);
       console.log(tg.isVerticalSwipesEnabled, "information");
       if (tg.enableVerticalSwipes) {
         alert(`enableVerticalSwipes ${tg.enableVerticalSwipes}`);
