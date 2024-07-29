@@ -7,6 +7,24 @@ import { useEffect } from "react";
 function App() {
   const navigate = useNavigate();
 
+  // TODO: test 스와이프
+  useEffect(() => {
+    alert("test!!");
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      console.log(tg.isVerticalSwipesEnabled, "information");
+      if (tg.enableVerticalSwipes) {
+        alert(`enableVerticalSwipes ${tg.enableVerticalSwipes}`);
+      }
+      if (tg.disableVerticalSwipes) {
+        alert(`disableVerticalSwipes ${tg.disableVerticalSwipes}`);
+      }
+      if (tg.isVerticalSwipesEnabled) {
+        alert(`isVerticalSwipesEnabled ${tg.isVerticalSwipesEnabled}`);
+      }
+    }
+  }, [window.Telegram]);
+
   useEffect(() => {
     // Telegram Web Apps SDK 로드 확인
     if (window.Telegram && window.Telegram.WebApp) {
