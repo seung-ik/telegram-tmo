@@ -62,7 +62,6 @@ function App() {
     if (window.Telegram && window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
 
-      console.log(tg, "/????////??/?");
       tg.ready();
       tg.sendData("web_app_setup_swipe_behavior", false, {
         allow_vertical_swipe: false,
@@ -99,7 +98,6 @@ function App() {
       if (location.pathname === "/telegram-tmo/") {
         // 첫 페이지인 경우 닫기 버튼 활성화
         tg.BackButton.hide();
-        tg.MainButton.show();
 
         // 닫기 버튼 클릭 이벤트 처리
         tg.MainButton.onClick(() => {
@@ -107,7 +105,6 @@ function App() {
         });
       } else {
         // 첫 페이지가 아닌 경우 뒤로 가기 버튼 활성화
-        tg.MainButton.hide();
         tg.BackButton.show();
 
         // 뒤로 가기 버튼 클릭 이벤트 처리
@@ -119,22 +116,21 @@ function App() {
       // 컴포넌트 언마운트 시 이벤트 핸들러 제거
       return () => {
         tg.BackButton.offClick();
-        tg.MainButton.offClick();
       };
     }
   }, [navigate, location.pathname]);
 
-  useEffect(() => {
-    if (Telegram) {
-      console.log(Telegram, "?????????????????");
-      // window.Telegram.WebView?.postEvent(
-      //   "web_app_setup_swipe_behavior",
-      //   (data: any) => console.log(data),
-      //   data2
-      // );
-      // Telegram.expand();
-    }
-  }, [Telegram]);
+  // useEffect(() => {
+  //   if (Telegram) {
+  //     console.log(Telegram, "?????????????????");
+  //     // window.Telegram.WebView?.postEvent(
+  //     //   "web_app_setup_swipe_behavior",
+  //     //   (data: any) => console.log(data),
+  //     //   data2
+  //     // );
+  //     // Telegram.expand();
+  //   }
+  // }, [Telegram]);
 
   return (
     // <Router />
