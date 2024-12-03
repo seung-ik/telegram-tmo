@@ -51,12 +51,27 @@ import { useEffect } from "react";
 
 function App() {
   const navigate = useNavigate();
+
   // const [swipeBehavior] = initSwipeBehavior();
 
   // useEffect(() => {
   //   swipeBehavior.disableVerticalSwipe();
   //   console.log(swipeBehavior.isVerticalSwipeEnabled); // false
   // }, []);
+
+  const handleClose = () => {
+    const isTelegramApp =
+      window.Telegram &&
+      window.Telegram.WebApp &&
+      window.Telegram.WebApp.initData;
+
+    if (isTelegramApp) {
+      window.Telegram.WebApp.close();
+    } else {
+      alert("You can visit through the Telegram app.");
+      window.close();
+    }
+  };
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -184,6 +199,8 @@ function App() {
           친구초대해보기
         </div>
       </div>
+      <button onClick={handleClose}> 닫기 테스트</button>
+
       <Router />
     </div>
   );

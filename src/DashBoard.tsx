@@ -13,11 +13,13 @@ import { beginCell } from "@ton/ton";
 import { useState } from "react";
 import { useIkekContract } from "./hooks/useIkekdContract";
 import TonWeb from "tonweb";
+import styled from "styled-components";
 
 const cx = classNames.bind(styles);
 
 const DashBoard = () => {
   const { open, close } = useTonConnectModal();
+  const tg = window.Telegram.WebApp;
 
   const { connected } = useTonConnect();
   const { jettonAddress } = useIkekContract();
@@ -132,20 +134,16 @@ const DashBoard = () => {
         >
           <TonConnectButton />
         </div>
-
         <button onClick={() => open()}>Open modal</button>
         <button onClick={() => close()}>Close modal</button>
-
         <div className="Card">
           <b>Counter Address</b>
           <div className="Hint">{address?.slice(0, 30) + "..."}</div>
         </div>
-
         <div className="Card">
           <b>Counter Value</b>
           <div>{value ?? "Loading..."}</div>
         </div>
-
         <a
           className={`Button ${connected ? "Active" : "Disabled"}`}
           onClick={() => {
@@ -198,9 +196,66 @@ const DashBoard = () => {
             </>
           )}
         </div>
+        <TestButton
+          onClick={() => {
+            console.log("showPopup");
+            tg.showPopup({ title: "show popup test", message: "message 영역" });
+          }}
+        >
+          showPopup
+        </TestButton>
+        <TestButton
+          onClick={() => {
+            console.log("showAlert");
+            tg.showAlert("showAlert123");
+          }}
+        >
+          showAlert
+        </TestButton>
+        <TestButton
+          onClick={() => {
+            console.log("showScanQrPopup");
+            tg.showScanQrPopup("qr코드입니다");
+          }}
+        >
+          showScanQrPopup
+        </TestButton>
+        <TestButton
+          onClick={() => {
+            console.log("requestWriteAccess");
+            tg.requestWriteAccess();
+          }}
+        >
+          requestWriteAccess
+        </TestButton>{" "}
+        <TestButton
+          onClick={() => {
+            console.log("requestContact");
+            tg.requestContact((isGranted: any) => {
+              if (isGranted) {
+                console.log("사용자가 전화번호를 공유했습니다.");
+                // 이후 Telegram 이벤트로 사용자 정보를 받을 수 있습니다.
+                tg.WebApp.onEvent("contactReceived", (data: any) => {
+                  console.log("전화번호 데이터:", data);
+                  // data에는 사용자 전화번호와 관련된 정보가 포함됩니다.
+                });
+              } else {
+                console.log("사용자가 전화번호 공유를 거부했습니다.");
+              }
+            });
+          }}
+        >
+          requestContact
+        </TestButton>
       </div>
     </div>
   );
 };
 
 export default DashBoard;
+
+const TestButton = styled.button`
+  padding: 10px;
+  border: 2px solid black;
+  backgound: yellow;
+`;
