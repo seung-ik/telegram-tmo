@@ -173,6 +173,7 @@ function App() {
         <div onClick={() => navigate(Paths.SlotGame)}>슬롯머신</div>
         <div onClick={() => navigate(Paths.JumpIframe)}>점프투점프</div>
         <div onClick={() => navigate(Paths.PlusIframe)}>더하기</div>
+        <div onClick={() => navigate(Paths.Apple)}>사과게임</div>
         <div
           onClick={() => {
             const tg = window.Telegram.WebApp;

@@ -7,6 +7,7 @@ import SlotIframe from "./slotGame/SlotIframe";
 import { useEffect } from "react";
 import TaptenIframe from "./jump/JumpIframe";
 import PlusIframe from "./plus/PlusIframe";
+import AppleGame from "./game/appleGame/AppleGame";
 
 export enum Paths {
   Dashboard = "/",
@@ -16,6 +17,7 @@ export enum Paths {
   SlotIframe = "/slot/start",
   JumpIframe = "/jump",
   PlusIframe = "/plus",
+  Apple = "/apple",
 }
 
 const Router = () => {
@@ -39,6 +41,7 @@ const Router = () => {
         <Route path={Paths.SlotGame} element={<SlotGame />} />
         <Route path={Paths.SlotIframe} element={<SlotIframe />} />
         <Route path={Paths.JumpIframe} element={<TaptenIframe />} />
+        <Route path={Paths.Apple} element={<AppleGame />} />
         <Route path={Paths.PlusIframe} element={<PlusIframe />} />
       </Route>
     </ReactRoutes>
