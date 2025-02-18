@@ -1,4 +1,3 @@
-console.log("??????");
 // 상수 정의
 const GRID_COLS = 9;
 const GRID_ROWS = 12;
@@ -137,6 +136,85 @@ function updateSelectionBox() {
   selectionBox.style.height = `${selectionRect.bottom - selectionRect.top}px`;
 }
 
+/* ========== 터치 이벤트 핸들러 ========== */
+function onPointerDown(e) {
+  if (!gameRunning) return;
+
+  // 터치 이벤트 처리
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+  isDragging = true;
+  startX = clientX;
+  startY = clientY;
+  currentX = clientX;
+  currentY = clientY;
+
+  selectionBox.classList.remove("hidden");
+  updateSelectionBox();
+}
+
+function onPointerMove(e) {
+  if (!isDragging) return;
+
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+  currentX = clientX;
+  currentY = clientY;
+  updateSelectionBox();
+
+  const selectionRect = getSelectionRect();
+  const apples = Array.from(document.querySelectorAll(".apple"));
+  let sum = 0;
+
+  apples.forEach((apple) => {
+    if (isElementInSelection(apple, selectionRect)) {
+      sum += parseInt(apple.dataset.value);
+      apple.classList.add("selected-apple");
+    } else {
+      apple.classList.remove("selected-apple");
+    }
+  });
+
+  selectionBox.style.borderColor = sum === 10 ? "red" : "blue";
+}
+
+function onPointerUp() {
+  if (!isDragging) return;
+  isDragging = false;
+  selectionBox.classList.add("hidden");
+
+  const selectionRect = getSelectionRect();
+  const apples = Array.from(document.querySelectorAll(".apple"));
+  let sum = 0;
+  const selectedApples = [];
+
+  apples.forEach((apple) => {
+    if (isElementInSelection(apple, selectionRect)) {
+      sum += parseInt(apple.dataset.value);
+      selectedApples.push(apple);
+    }
+  });
+
+  if (sum === 10 && selectedApples.length > 0) {
+    selectedApples.forEach((apple) => {
+      apple.classList.add("pop");
+      apple.addEventListener(
+        "animationend",
+        () => {
+          apple.classList.remove("apple", "pop");
+          apple.classList.add("empty");
+          apple.textContent = "";
+          apple.dataset.value = 0;
+        },
+        { once: true }
+      );
+    });
+    updateScore(selectedApples.length);
+  }
+}
+
 /* ========== 마우스 이벤트 핸들러 ========== */
 function onMouseDown(e) {
   if (!gameRunning) return;
@@ -230,6 +308,12 @@ function startGame() {
   grid.addEventListener("mousemove", onMouseMove);
   grid.addEventListener("mouseup", onMouseUp);
   grid.addEventListener("mouseleave", onMouseUp);
+
+  // 터치 이벤트 리스너 (모바일 대응)
+  grid.addEventListener("touchstart", onPointerDown);
+  grid.addEventListener("touchmove", onPointerMove);
+  grid.addEventListener("touchend", onPointerUp);
+  grid.addEventListener("touchcancel", onPointerUp);
 
   startTimer();
 
