@@ -1,7 +1,7 @@
 // 상수 정의
-const GRID_COLS = 9;
+const GRID_COLS = 8;
 const GRID_ROWS = 12;
-const TOTAL_TIME = 100; // 120초 = 2분
+const TOTAL_TIME = 90; // 120초 = 2분
 
 // 게임 상태 변수
 let score = 0;
