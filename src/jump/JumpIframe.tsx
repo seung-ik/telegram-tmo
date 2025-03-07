@@ -1,4 +1,3 @@
-import Telegram from "@twa-dev/sdk";
 import { useRef, useState } from "react";
 
 const JumpIframe: React.FC = () => {
