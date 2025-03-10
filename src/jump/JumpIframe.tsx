@@ -32,8 +32,21 @@ const JumpIframe: React.FC = () => {
         canvasRef.current.width,
         canvasRef.current.height
       );
-      setImage(canvasRef.current.toDataURL("image/png"));
+      const dataUrl = canvasRef.current.toDataURL("image/png");
+      setImage(dataUrl);
     }
+  };
+
+  // 이미지 저장
+  const saveImage = () => {
+    if (!image) return;
+
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = `captured_${Date.now()}.png`; // 이미지 파일 이름 설정
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link); // 다운로드 후 삭제
   };
 
   return (
@@ -53,11 +66,14 @@ const JumpIframe: React.FC = () => {
         height={480}
       />
       {image && (
-        <img
-          src={image}
-          alt="Captured"
-          style={{ width: "100%", marginTop: "10px" }}
-        />
+        <>
+          <img
+            src={image}
+            alt="Captured"
+            style={{ width: "100%", marginTop: "10px" }}
+          />
+          <button onClick={saveImage}>이미지 저장</button>
+        </>
       )}
     </div>
   );
